@@ -9,4 +9,4 @@ To change the language of dashboard, change the lang variable 'var lang = 'EN''
 
 ## Preview
 
-You can preview this dashboard [here]().
+You can preview this dashboard [here](https://opendevelopmentmekong.github.io/odmm-mbei-dashboard/).
