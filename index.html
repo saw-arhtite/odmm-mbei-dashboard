@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway" rel="stylesheet">
+    <link href='https://mmwebfonts.comquas.com/fonts/?font=pyidaungsu' rel="stylesheet" />
+    <script src="https://d3js.org/d3.v3.js"></script>
+
+    <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+    <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+    <!--<script src="https://d3js.org/d3-transition.v1.min.js"></script>-->
+    <script src="https://d3js.org/d3-timer.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+
+    <script class="internal" src="variables.js"></script>
+    <script class="internal" src="geoVariables.js"></script>
+    <script class="internal" src="radarChart.js"></script>
+    <script class="internal" src="barChart.js"></script>
+    <script class="internal" src="unit1.js"></script>
+    <script class="internal" src="unit2.js"></script>
+    <script class="internal" src="unit3.js"></script>
+    <script class="internal" src="unit4.js"></script>
+  </head>
+  <body>
+    <!-- <a class="wpckan_dataset_resource_url button download"
+      href="https://data.opendevelopmentmekong.net/dataset/217c73e8-f456-4392-a43e-1ba2a0694a92/resource/9d40f3cb-e45a-43d3-b771-93aa6ba5a540/download/mmrairport2015.zip"
+      data-ga-event="Dataset|resource_download|217c73e8-f456-4392-a43e-1ba2a0694a92/9d40f3cb-e45a-43d3-b771-93aa6ba5a540">
+      <i class="fa fa-download"></i>Download
+    </a> -->
+    <div class="unit intro copy">
+      <p></p>
+    </div>
+
+    <div class="unit donors">
+      <img id="taf" width="150px" height="100px" src="images/taf.png"/>
+      <img id="dana" width="96px" height="64px" src="images/dana.png"/>
+      <img id="ukaid" width="96px" height="96px" src="images/ukaid.png"/>
+    </div>
+
+    <div class="unit unit1 copy">
+    <!--  <button type="button" onclick="drawNationChart(false, 'unit1RadarChart');">States/Regions</button> |
+      <button type="button" onclick="drawNationChart(true, 'unit1RadarChart');">Townships</button>
+    -->
+    <div class="subunit unit1RadarChart">
+      <h3 class="copy"></h3>
+    </div>
+    <div class="subunit unit1BarChart">
+      <h3 class="copy"></h3>
+    </div>
+    </div>
+
+    <div class="unit download">
+      <h3></h3>
+      <a class="wpckan_dataset_resource_url button download" href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/19ec773c-577c-4b6b-ad8c-58e991ddbac3/download/mbei-report-final-april-19-digital-version-spreads.pdf" data-ga-event="Dataset|resource_download|085c6354-f228-4014-932b-208df573a878/19ec773c-577c-4b6b-ad8c-58e991ddbac3"><i class="fa fa-download"></i>
+        MBEI Report 2019</a>
+      <a class="wpckan_dataset_resource_url button download" href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/59800df1-dabc-4eff-b9f3-bb5e34254c9e/download/township_all_indicators_final.xls" data-ga-event="Dataset|resource_download|085c6354-f228-4014-932b-208df573a878/59800df1-dabc-4eff-b9f3-bb5e34254c9e"><i class="fa fa-download"></i>
+        Township-level Data</a>
+      <a class="wpckan_dataset_resource_url button download" href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/344294ed-a455-41ae-86c6-05d781007efe/download/state_all_indicators_final.xls" data-ga-event="Dataset|resource_download|085c6354-f228-4014-932b-208df573a878/344294ed-a455-41ae-86c6-05d781007efe"><i class="fa fa-download"></i>
+        State/Region-level Data</a>
+    </div>
+    <hr/>
+
+    <div class="unit unit2 copy">
+      <h3 class="copy"></h3>
+      <div>
+      <select id="subnationalDropdown" class="copy" onchange="drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart'); changeSelected(false); moveTspCursor(unit2Township); hideMedianInfo();"></select>
+      <button type="button" onclick="unit2Township = false; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart'); drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); drawMap(); showMedianInfo();"></button> |
+      <button type="button" onclick="unit2Township = true; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart');drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); switchMap(); showMedianInfo();"></button>
+    </div>
+      <div class="subunit mapSelector"></div>
+      <div class="subunit unit2RadarChart"></div>
+  <!--<div class="subunit unit2BarChart"></div>-->
+
+    </div>
+
+    <hr/>
+    <div class="unit unit4 copy">
+      <h3 class="copy">Performance rankings for each subindicator</h3>
+      <div class="subunit unit4Buttons">
+      </div>
+      <div class="subunit unit4Switch">
+        <button type="button" onclick="unit4Township = false; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score'); hideSlider();"></button> |
+        <button type="button" onclick="unit4Township = true; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score');"></button>
+      </div>
+      <div class="subunit unit4BarChart">
+        <h4><a class="subindexName copy"></a></h4>
+      </div>
+      <div class="subunit unit4Slider">
+      </div>
+    </div>
+
+    <hr/>
+    <div class="unit unit3 copy">
+      <h3 class="copy">Compare subindex scores between two areas</h3>
+      <div id="areaSelector">
+        <div id="select1Color"></div><select class="copy" id="select1" onchange="changeRadar('#select1', '#select2', unit3Township)"></select>
+        <div id="select2Color"></div><select class="copy" id="select2" onchange="changeRadar('#select1', '#select2', unit3Township)"></select>
+      </div>
+      <div id="areaLevelSelector">
+        <button type="button" onclick="unit3Township = false; setAreaLevel(srData, '.unit3', false); changeRadar('#select1','#select2', false);"></button> |
+        <button type="button" onclick="unit3Township = true; setAreaLevel(tspData, '.unit3', true); changeRadar('#select1','#select2', true);"></button>
+      </div>
+      <div class="radarChart" align="center"></div>
+    </div>
+
+    <script>
+
+        /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+        /* @@@@           Initializing         @@@@ */
+        /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+        var srData = d3.csv.parse(mbei_stateregion);
+        var tspData = d3.csv.parse(mbei_township);
+        var subDataSpliceIndex = 5;      // how many columns to skip to reach 'sub1'
+        var lang = 'EN';
+
+        renderText(lang);
+        if (lang == 'MM') {
+          d3.selectAll('.copy').style('font-family', 'Pyidaungsu !important');
+        } else if (lang == 'EN') {
+          d3.selectAll('.copy').style('font-family', 'Montserrat');
+        }
+
+        var tspTextAccessor = "", srTextAccessor = "";
+        if (lang == 'MM') {
+          tspTextAccessor = "township_name:mm";
+          srTextAccessor = "state_name:mm";
+        } else if (lang == 'EN'){
+          tspTextAccessor = "township_name:taf";
+          srTextAccessor = "state_name:taf";
+        }
+        tspData.sort(function(a,b) {
+          return a[tspTextAccessor].localeCompare(b[tspTextAccessor]);
+        });
+        srData.sort(function(a,b) {
+          return a[srTextAccessor].localeCompare(b[srTextAccessor]);
+        });
+        //Unit 1
+        drawNationChart(false, '.unit1RadarChart');
+        var unit1BarData = reshapeForUnit1BarChart(srData);
+        barChart(unit1BarData, '.unit1BarChart', {tiers: true});
+        drawLegend();
+        //Unit 2
+        drawMap();
+        var unit2Township = false;
+        populateSubnationalDropdown(unit2Township, '#subnationalDropdown');
+        drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart');
+        drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart');
+        showMedianInfo();
+        // Unit 3
+        var unit3Township = false;
+        setAreaLevel(srData, '.unit3');
+        changeRadar('#select1', '#select2', unit3Township);
+        // Unit 4
+        var currentSubindex = 'sub1';
+        var unit4Township = false;
+        generateSubindexButtons('.unit4Buttons');
+        drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score'));
+        changeSubindexTitle('Overall Score');
+
+        /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+        /* @@@@ General purpose functions here @@@@ */
+        /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+        // NOTE: Function will break if township or stateregion values are not unique
+        function lookup(toFind, searchVar, returnVar, township) {
+          var returnList = [];
+          var data = {};
+          if (township == true) {
+            data = tspData;
+          } else {
+            data = srData;
+          }
+          for (var i in toFind) { returnList.push(0); }
+          // Loop through the data table
+          for (i in data) {
+            var item = data[i][searchVar];
+            // See if each line contains the items we want to find
+            for (var j in toFind) {
+              if (item == toFind[j]) {
+               // When found, return a list of translated items
+               returnList[j] = data[i][returnVar];
+              }
+            }
+          }
+          return returnList;
+        }
+      </script>
+  </body>
+</html>
