@@ -1,11 +1,18 @@
-<html>
+<html lang="en-US">
   <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css?family=Montserrat|Raleway"
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       href="https://mmwebfonts.comquas.com/fonts/?font=pyidaungsu"
       rel="stylesheet"
@@ -31,6 +38,7 @@
     <script class="internal" src="unit2.js"></script>
     <script class="internal" src="unit3.js"></script>
     <script class="internal" src="unit4.js"></script>
+    <title>MBEI Dashboard</title>
   </head>
   <body>
     <!-- <a class="wpckan_dataset_resource_url button download"
@@ -43,9 +51,27 @@
     </div>
 
     <div class="unit donors">
-      <img id="taf" width="150px" height="100px" src="images/taf.png" />
-      <img id="dana" width="96px" height="64px" src="images/dana.png" />
-      <img id="ukaid" width="96px" height="96px" src="images/ukaid.png" />
+      <img
+        id="taf"
+        width="150px"
+        height="100px"
+        src="images/taf.png"
+        title="TAF logo"
+      />
+      <img
+        id="dana"
+        width="96px"
+        height="64px"
+        src="images/dana.png"
+        title="DANA logo"
+      />
+      <img
+        id="ukaid"
+        width="96px"
+        height="96px"
+        src="images/ukaid.png"
+        title="UK AID logo"
+      />
     </div>
 
     <div class="unit donors">
@@ -136,11 +162,13 @@
         ></select>
         <button
           type="button"
+          title="Select States/Region button"
           onclick="unit2Township = false; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart'); drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); drawMap(); showMedianInfo();"
         ></button>
         |
         <button
           type="button"
+          title="Select Township button"
           onclick="unit2Township = true; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart');drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); switchMap(); showMedianInfo();"
         ></button>
       </div>
@@ -156,11 +184,13 @@
       <div class="subunit unit4Switch">
         <button
           type="button"
+          title="Select States/Region button"
           onclick="unit4Township = false; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score'); hideSlider();"
         ></button>
         |
         <button
           type="button"
+          title="Select Township button"
           onclick="unit4Township = true; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score');"
         ></button>
       </div>
@@ -190,17 +220,19 @@
       <div id="areaLevelSelector">
         <button
           type="button"
+          title="Select States/Region button"
           onclick="unit3Township = false; setAreaLevel(srData, '.unit3', false); changeRadar('#select1','#select2', false);"
         ></button>
         |
         <button
           type="button"
+          title="Select Township button"
           onclick="unit3Township = true; setAreaLevel(tspData, '.unit3', true); changeRadar('#select1','#select2', true);"
         ></button>
       </div>
       <div class="radarChart" align="center"></div>
     </div>
-
+    <!-- #TODO Move this inline JavaScript into its own file -->
     <script>
       /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
       /* @@@@           Initializing         @@@@ */
@@ -323,5 +355,6 @@
         return returnList;
       }
     </script>
+    <!-- #TODO Move this inline JavaScript into its own file -->
   </body>
 </html>
