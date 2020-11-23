@@ -289,12 +289,14 @@
           var tspData = d3.csv.parse(mbei_township);
         }
 
-        //drawNationChart(false, ".unit1RadarChart");
-        //var unit1BarData = reshapeForUnit1BarChart(srData);
-        //barChart(unit1BarData, ".unit1BarChart", { tiers: true });
-        //drawLegend();
+        //Redraw unit1Radarhart and unit1BarChart
+        drawNationChart(false, ".unit1RadarChart");
+        var unit1BarData = reshapeForUnit1BarChart(srData);
+        //TODO Force remove the previous svg. This needes to be handled with barChart function
+        d3.select(".unit1BarChart").select("svg").remove();
+        barChart(unit1BarData, ".unit1BarChart", { tiers: true });
+        drawLegend();
       }
-
       // NOTE: Function will break if township or stateregion values are not unique
       function lookup(toFind, searchVar, returnVar, township) {
         var returnList = [];
