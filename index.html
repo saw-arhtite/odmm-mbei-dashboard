@@ -52,27 +52,9 @@
     </div>
 
     <div class="unit donors">
-      <img
-        id="taf"
-        width="150px"
-        height="100px"
-        src="images/taf.png"
-        title="TAF logo"
-      />
-      <img
-        id="dana"
-        width="96px"
-        height="64px"
-        src="images/dana.png"
-        title="DANA logo"
-      />
-      <img
-        id="ukaid"
-        width="96px"
-        height="96px"
-        src="images/ukaid.png"
-        title="UK AID logo"
-      />
+      <img id="taf" width="150px" height="100px" src="images/taf.png" />
+      <img id="dana" width="96px" height="64px" src="images/dana.png" />
+      <img id="ukaid" width="96px" height="96px" src="images/ukaid.png" />
     </div>
 
     <div class="unit donors"></div>
@@ -163,13 +145,11 @@
         ></select>
         <button
           type="button"
-          title="Select States/Region button"
           onclick="unit2Township = false; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart'); drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); drawMap(); showMedianInfo();"
         ></button>
         |
         <button
           type="button"
-          title="Select Township button"
           onclick="unit2Township = true; populateSubnationalDropdown(unit2Township, '#subnationalDropdown'); drawSubNationChart(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2RadarChart');drawSubnationBar(areaNameFromDropdown('#subnationalDropdown'), unit2Township, '.unit2BarChart'); switchMap(); showMedianInfo();"
         ></button>
       </div>
@@ -185,13 +165,11 @@
       <div class="subunit unit4Switch">
         <button
           type="button"
-          title="Select States/Region button"
           onclick="unit4Township = false; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score'); hideSlider();"
         ></button>
         |
         <button
           type="button"
-          title="Select Township button"
           onclick="unit4Township = true; drawSubindexBar('.unit4BarChart', buildBarData(unit4Township, 'Overall Score')); changeSubindexTitle('Overall Score');"
         ></button>
       </div>
@@ -221,13 +199,11 @@
       <div id="areaLevelSelector">
         <button
           type="button"
-          title="Select States/Region button"
           onclick="unit3Township = false; setAreaLevel(srData, '.unit3', false); changeRadar('#select1','#select2', false);"
         ></button>
         |
         <button
           type="button"
-          title="Select Township button"
           onclick="unit3Township = true; setAreaLevel(tspData, '.unit3', true); changeRadar('#select1','#select2', true);"
         ></button>
       </div>
