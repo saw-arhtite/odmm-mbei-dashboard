@@ -1,3 +1,15 @@
+html {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+}
+
 .subunit > h3 {
   text-align: center;
 }
@@ -12,6 +24,19 @@
   margin: 0 auto;
   text-align: center;
   padding-bottom: 20px;
+
+}
+ .download a.button {
+  color: #fff; 
+  background: #7dd220!important;
+  height: 24px;
+  border: 1px #c8c8c8 solid;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+.button i {
+  margin-right: 10px;
 }
 
 select {
@@ -21,7 +46,6 @@ select {
 button {
   height: 36px;
   margin-bottom: 15px;
-  padding-bottom: 25px;
 }
 
 /* *** UNIT 1 *** */
@@ -169,4 +193,12 @@ button {
   height: 25px; /* Slider handle height */
   background: #59396c; /* Green background */
   cursor: pointer; /* Cursor on hover */
+}
+
+hr {
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    margin: 10px 0 30px;
+    height: 0;
 }
