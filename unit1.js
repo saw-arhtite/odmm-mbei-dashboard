@@ -53,12 +53,11 @@ function drawLegend() {
 }
 function generateMedians(township) {
   var data;
-  if (township == true) {
+    if (township == true) {
     data = tspData;
   } else {
     data = srData;
   }
-
   var medianData = [[]];
   var keys = Object.keys(data[0]);
   keys.splice(0, subDataSpliceIndex);

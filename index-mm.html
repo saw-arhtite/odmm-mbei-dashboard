@@ -30,9 +30,9 @@
     <script src="https://d3js.org/d3-timer.v1.min.js"></script>
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
     <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+    <script class="internal" src="base.js"></script>
     <script class="internal" src="variables.js"></script>
     <script class="internal" src="geoVariables.js"></script>
-    <script class="internal" src="base.js"></script>
     <script class="internal" src="radarChart.js"></script>
     <script class="internal" src="barChart.js"></script>
     <script class="internal" src="unit1.js"></script>
@@ -66,7 +66,7 @@
           value="2019"
           onclick="switch_dataset(2019);"
         >
-          2019
+          MBEI 2019
         </button>
         <button
           id="button2020"
@@ -75,7 +75,7 @@
           onclick="switch_dataset(2020);"
           disabled
         >
-          2020
+          MBEI 2020
         </button>
       </p>
     </div>
@@ -96,27 +96,27 @@
 
       <a
         class="wpckan_dataset_resource_url button download"
-        href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/19ec773c-577c-4b6b-ad8c-58e991ddbac3/download/mbei-report-final-april-19-digital-version-spreads.pdf"
-        data-ga-event="Dataset|resource_download|085c6354-f228-4014-932b-208df573a878/19ec773c-577c-4b6b-ad8c-58e991ddbac3"
-        ><i class="fa fa-download"></i> MBEI Report 2020</a
+        href="https://data.opendevelopmentmekong.net/dataset/f190870b-84d0-4a2c-8b14-98cb3c94ad80/resource/d04bf2a1-a6a7-4c75-a5f6-8625ba175afe/download/myanmar-business-environment-index-2020_mm.pdf"
+        data-ga-event="Dataset|resource_download|d04bf2a1-a6a7-4c75-a5f6-8625ba175afe"
+        ><i class="fa fa-download"></i> MBEI Report 2020 (MM)</a
       >
       <a
         class="wpckan_dataset_resource_url button download"
-        href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/19ec773c-577c-4b6b-ad8c-58e991ddbac3/download/mbei-report-final-april-19-digital-version-spreads.pdf"
-        data-ga-event="Dataset|resource_download|085c6354-f228-4014-932b-208df573a878/19ec773c-577c-4b6b-ad8c-58e991ddbac3"
-        ><i class="fa fa-download"></i> MBEI Report 2019</a
+        href="https://data.opendevelopmentmekong.net/dataset/085c6354-f228-4014-932b-208df573a878/resource/75598184-067e-401b-8a39-8f9c583c64ef/download/myanmar-business-environment-index_burmese-12.9.19.pdf"
+        data-ga-event="Dataset|resource_download|75598184-067e-401b-8a39-8f9c583c64ef"
+        ><i class="fa fa-download"></i> MBEI Report 2019 (MM)</a
+      >
+
+      <a
+        class="wpckan_dataset_resource_url button download"
+        href="https://data.opendevelopmentmekong.net/dataset/myanmar-business-environment-index-2020_en?type=dataset"
+        ><i class="fa fa-download"></i>MBEI 2020 Data</a
       >
 
       <a
         class="wpckan_dataset_resource_url button download"
         href="https://data.opendevelopmentmekong.net/dataset/the-myanmar-business-environment-index-2019"
-        ><i class="fa fa-download"></i>2019 Data</a
-      >
-
-      <a
-        class="wpckan_dataset_resource_url button download"
-        href="https://data.opendevelopmentmekong.net/dataset/the-myanmar-business-environment-index-2019"
-        ><i class="fa fa-download"></i>2020 Data</a
+        ><i class="fa fa-download"></i>MBEI 2019 Data</a
       >
 
       <!--
@@ -211,6 +211,9 @@
     </div>
     <!-- #TODO Move this inline JavaScript into its own file -->
     <script>
+      /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+      /* @@@@           Initializing         @@@@ */
+      /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
       var srData = d3.csv.parse(mbei_stateregion);
       var tspData = d3.csv.parse(mbei_township);
       var subDataSpliceIndex = 5; // how many columns to skip to reach 'sub1'
@@ -238,43 +241,37 @@
       srData.sort(function (a, b) {
         return a[srTextAccessor].localeCompare(b[srTextAccessor]);
       });
+      draw_charts();
 
-      //Unit 1
-      drawNationChart(false, ".unit1RadarChart");
-      var unit1BarData = reshapeForUnit1BarChart(srData);
-      barChart(unit1BarData, ".unit1BarChart", { tiers: true });
-      drawLegend();
+      /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+      /* @@@@ General purpose functions here @@@@ */
+      /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
-      //Unit 2
-      drawMap();
-      var unit2Township = false;
-      populateSubnationalDropdown(unit2Township, "#subnationalDropdown");
-      drawSubNationChart(
-        areaNameFromDropdown("#subnationalDropdown"),
-        unit2Township,
-        ".unit2RadarChart"
-      );
-      drawSubnationBar(
-        areaNameFromDropdown("#subnationalDropdown"),
-        unit2Township,
-        ".unit2BarChart"
-      );
-      showMedianInfo();
-
-      // Unit 3
-      var unit3Township = false;
-      setAreaLevel(srData, ".unit3");
-      changeRadar("#select1", "#select2", unit3Township);
-      // Unit 4
-      var currentSubindex = "sub1";
-      var unit4Township = false;
-      generateSubindexButtons(".unit4Buttons");
-      drawSubindexBar(
-        ".unit4BarChart",
-        buildBarData(unit4Township, "Overall Score")
-      );
-      changeSubindexTitle("Overall Score");
+      // NOTE: Function will break if township or stateregion values are not unique
+      function lookup(toFind, searchVar, returnVar, township) {
+        var returnList = [];
+        var data = {};
+        if (township == true) {
+          data = tspData;
+        } else {
+          data = srData;
+        }
+        for (var i in toFind) {
+          returnList.push(0);
+        }
+        // Loop through the data table
+        for (i in data) {
+          var item = data[i][searchVar];
+          // See if each line contains the items we want to find
+          for (var j in toFind) {
+            if (item == toFind[j]) {
+              // When found, return a list of translated items
+              returnList[j] = data[i][returnVar];
+            }
+          }
+        }
+        return returnList;
+      }
     </script>
-    <!--     #TODO Move this inline JavaScript into its own file -->
   </body>
 </html>
