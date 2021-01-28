@@ -286,7 +286,7 @@ function showMedianInfo() {
     .append('svg:text')
     .attr('id', 'medianInfo')
     .attr('x', (275+190) * 0.5)
-    .attr('y', 375 * 0.225)
+    .attr('y', 360)
     .attr('text-anchor', 'middle')
     .attr('font-style', 'italic')
     .text(copy['medianInfo'][lang])
