@@ -389,6 +389,7 @@ var pcodeTranslate = {
   MMR006: { EN: "Tanintharyi Region", MM: "တနင်္သာရီတိုင်းဒေသကြီး" },
   MMR111: { EN: "Bago Region", MM: "ပဲခူးတိုင်းဒေသကြီး" },
   MMR007: { EN: "Bago Region", MM: "ပဲခူးတိုင်းဒေသကြီး" },
+  MMR008: { EN: "Bago Region", MM: "ပဲခူးတိုင်းဒေသကြီး" },
   MMR009: { EN: "Magway Region", MM: "မကွေးတိုင်းဒေသကြီး" },
   MMR010: { EN: "Mandalay Region", MM: "မန္တလေးတိုင်းဒေသကြီး" },
   MMR011: { EN: "Mon State", MM: "မွန်ပြည်နယ်" },
