@@ -1,8 +1,8 @@
-// TODO unit4Township needs to be declared outside the function?
-
+// TODO Better Variable hoisting needed
 var unit2Township = false;
 var unit3Township = false;
 var unit4Township = false;
+
 
 // Draw the Dashboard
 
@@ -38,8 +38,7 @@ function draw_charts() {
       var currentSubindex = "sub1";
       var unit4Township = false;
       generateSubindexButtons(".unit4Buttons");
-  
- // TODO Really strange chain function calls?        
+        
   drawSubindexBar(
         ".unit4BarChart",
         buildBarData(unit4Township, "Overall Score")
@@ -52,17 +51,15 @@ function draw_charts() {
 // Simple function to switch 2020-2019 datasets
       function switch_dataset(year) {
         if (year == "2019") {
-          // Enable 2020 button and disable 2019 button
-          d3.select("#button2020").attr("disabled", null);
-          d3.select("#button2019").attr("disabled", true);
           srData = d3.csv.parse(mbei_stateregion_2019);
           tspData = d3.csv.parse(mbei_township_2019);
+          d3.select("#button2019").attr('class', 'button is-success');
+          d3.select("#button2020").attr('class', 'button');
         } else {
-          // Enable 2019 button and disable 2020 button
-          d3.select("#button2019").attr("disabled", null);
-          d3.select("#button2020").attr("disabled", true);
           srData = d3.csv.parse(mbei_stateregion);
           tspData = d3.csv.parse(mbei_township);
+          d3.select("#button2020").attr('class', 'button is-success');
+          d3.select("#button2019").attr('class', 'button');
         }
      
        //TODO Force remove the previous svg. This needes to be handled with barChart function

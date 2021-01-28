@@ -39,6 +39,14 @@ body {
   margin-right: 10px;
 }
 
+.button,
+.dt-button,
+a.button,
+button {
+color: #fff;
+ background:#59396c
+}
+
 select {
   height: 28px;
   width: 30%;
@@ -64,9 +72,6 @@ button {
   justify-content: space-between;
   margin-top: 10px;
   padding: 0 10% 0 10%;
-}
-.years {
-  text-align: center;
 }
 
 #dana {

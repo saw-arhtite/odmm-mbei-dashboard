@@ -21,6 +21,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="bulma.min.css" />
     <script src="https://d3js.org/d3.v3.js"></script>
 
     <script src="https://d3js.org/d3-axis.v1.min.js"></script>
@@ -58,26 +59,29 @@
     </div>
 
     <div class="unit donors"></div>
-    <div class="years">
-      <p>
-        <button
-          id="button2019"
-          type="button"
-          value="2019"
-          onclick="switch_dataset(2019);"
-        >
-          MBEI 2019
-        </button>
-        <button
-          id="button2020"
-          type="button"
-          value="2020"
-          onclick="switch_dataset(2020);"
-          disabled
-        >
-          MBEI 2020
-        </button>
-      </p>
+    <div class="columns is-centered is-mobile">
+      <div class="field has-addons">
+        <p class="control">
+          <button
+            id="button2019"
+            class="button"
+            value="2019"
+            onclick="switch_dataset(2019);"
+          >
+            <span> MBEI 2019</span>
+          </button>
+        </p>
+        <p class="control">
+          <button
+            id="button2020"
+            class="button is-success"
+            value="2020"
+            onclick="switch_dataset(2020);"
+          >
+            <span>MBEI 2020</span>
+          </button>
+        </p>
+      </div>
     </div>
     <div class="unit unit1 copy">
       <!--  <button type="button" onclick="drawNationChart(false, 'unit1RadarChart');">States/Regions</button> |
